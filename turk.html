@@ -1,16 +1,14 @@
 <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
-<crowd-form>
+<crowd-form id = "myForm">
     <h1>Please annotate this image: </h1>
 	<img src="${image_url}"/>
 	<crowd-tabs>
 		
 		<crowd-tab header="Projection at the top of the bridge">
-			<h2>Pick the image that is most similar to this region of the person's nose</h2>
-			<img src="${bridge_region_url}" max-width="50%" height=50%/>
-			<br>
 			<h3></h3>
 			<crowd-radio-group>
+			    <h2>Projection of the bridge refers to how far out the nose bridge protrudes from this person's face</h2>
 				<crowd-radio-button name="nose_projection_flat" value="nose_projection_bridge_flat">This person's bridge projection is closest to this:</crowd-radio-button>
 				<br>
 				<img src="${flat_bridge_projection_url}" max-width="50%" height=50%/>
@@ -27,11 +25,9 @@
 			
 			
 			<crowd-tab header="Projection at the tip of the nose">
-			<h2>Pick the image that is most similar to this region of the person's nose</h2>
-			<img src="${tip_region_url}" max-width="50%" height=50%/>
-			<br>
 			<h3></h3>
 			<crowd-radio-group>
+			    <h2>Projection of the tip refers to how far the nose tip protrudes from the base of the person's nose</h2>
 				<crowd-radio-button name="tip_projection_flat" value="nose_projection_tip_flat">The person's tip projection is closest to this:</crowd-radio-button>
 				<br>
 				<img src="${flat_tip_projection_url}" max-width="50%" height=50%/>
@@ -48,11 +44,9 @@
 		    
 		    
 		    <crowd-tab header="Style of the bridge">
-			<h2>Pick the image that is most similar to this region of the person's nose</h2>
-			<img src="${bridge_style_url}" max-width="50%" height=50%/>
-			<br>
 			<h3></h3>
 			<crowd-radio-group>
+			     <h2>The style of the bridge refers to the shape this person's nose bridge has: a concave shape, straight shape, or convex shape</h2>
 				<crowd-radio-button name="bridge_style_upturned" value="bridge_style_upturned">The person's bridge style is closest to this:</crowd-radio-button>
 					<br>
 				<img src="${bridge_style_upturned_url}" max-width="50%" height=50%/>
@@ -72,11 +66,9 @@
 		    
 		    		    
 		    <crowd-tab header="Style of the tip">
-			<h2>Pick the image that is most similar to this region of the person's nose</h2>
-			<img src="${tip_style_url}" max-width="50%" height=50%/>
-			<br>
 			<h3></h3>
 			<crowd-radio-group>
+			    <h2>The style of the tip refers to how the nose tip protrudes from the base of the nose. Does it protrude up, straight forward, or down?</h2>
 				<crowd-radio-button name="tip_style_upturned" value="nose_tip_style_upturned">The person's tip style is closest to this:</crowd-radio-button>
 					<br>
 				<img src="${tip_style_upturned_url}" max-width="50%" height=50%/>
@@ -94,11 +86,9 @@
 		    
 		    
 		    <crowd-tab header="Nose width">
-			<h2>Pick the image that is most similar to this region of the person's nose</h2>
-			<img src="${width_region_url}" max-width="50%" height=50%/>
-			<br>
 			<h3></h3>
 			<crowd-radio-group>
+			    <h2>Width of the person's nose (most will be medium)</h2>
 				<crowd-radio-button name="width_narrow" value="width_narrow">The person's nose width is closest to this:</crowd-radio-button>
 					<br>
 				<img src="${width_narrow_url}" max-width="50%" height=50%/>
@@ -114,11 +104,9 @@
 		    </crowd-tab>
 		    
 		    <crowd-tab header="Nasal hump">
-			<h2>Pick the image that is most similar to this region of the person's nose</h2>
-			<img src="${nasalhump_region_url}" max-width="50%" height=50%/>
-			<br>
 			<h3></h3>
 			<crowd-radio-group>
+			    <h2>The nasal hump is a small bump on the nose bridge</h2>
 				<crowd-radio-button name="width_narrow" value="width_narrow">This person has a nasal hump</crowd-radio-button>
 					<br>
 				<img src="${nasal_hump_url}" max-width="50%" height=50%/>
@@ -129,10 +117,8 @@
 			</crowd-radio-group>
 		    </crowd-tab>
 		    
-
 		    
-		    
-		    
+		  
 		    
 	</crowd-tabs>
 	<full-instructions header="Classification Instructions">
@@ -142,9 +128,59 @@
 	<short-instructions>
 	  <p>Read the task carefully and inspect the image.</p>
 	  <p>Choose the appropriate label that best suits the image.</p>
-	  <crowd-button>
-		<iron-icon icon="question-answer"/>
-	  </crowd-button>
 	</short-instructions>
   </crowd-image-classifier>
+  
+  
+  
 </crowd-form>
+
+<script>
+let isSubmitting = false;
+// add an event listener for the "submit" event on the form element
+document.getElementById("myForm").addEventListener("submit", function(event) {
+  if (isSubmitting) {
+      return
+  }
+  // prevent the default form submission behavior
+  event.preventDefault();
+
+  // check if at least one button is selected in each header
+  var headers = document.querySelectorAll("crowd-tab");
+  console.log(headers)
+  var formValid = true;
+  for (var i = 0; i < headers.length; i++) {
+    var buttons = headers[i].querySelectorAll("crowd-radio-button");
+    var buttonChecked = false;
+    for (var j = 0; j < buttons.length; j++) {
+      if (buttons[j].checked) {
+        buttonChecked = true;
+        break;
+      }
+    }
+    if (!buttonChecked) {
+      formValid = false;
+      break;
+    }
+  }
+//awsui-button awsui-button-variant-primary awsui-hover-child-icons
+//.querySelectorAll("crowd-radio-button");
+  // If the form is valid, submit the form
+  //footer = document.querySelectorAll(".footer")
+  const doc = document.getElementById("myForm").shadowRoot
+  const footers = doc.querySelectorAll("footer")[0]
+  button = footers.querySelectorAll(".awsui-button")
+  console.log(button[0])
+  //console.log(footer.querySelectorAll(".actionsContainer"))
+  if (formValid) {
+     isSubmitting = true
+    button[0].click()
+    
+  } else {
+    alert("Please select at least one button in each tab.");
+    console.log(unsubmitted)
+  }
+});
+
+</script>
+
