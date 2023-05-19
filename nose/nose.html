@@ -1,0 +1,151 @@
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<crowd-form id = "myForm">
+    <h1>Please annotate this image: </h1>
+	<img src="${image_url}"/>
+	<crowd-tabs>
+	    
+		<crowd-tab header="Projection at nose bridge">
+			<h3></h3>
+			<crowd-radio-group>
+			    <h2>This person's eye width is closest to:</h2>
+			    
+			    <div class="row">
+                    <div class="column">
+                        <input type="radio" id="projection_flat" name="nose_projection" value="nose_projection_bridge_flat" required> 
+						<br>
+						<img src="${flat_bridge_projection_url}" max-width="250px" height="250px"/>
+					</div>
+
+                    <div class="column">
+                        <input type="radio" id="width_small" name="nose_projection" value="eye_width_small" required> 
+		          		<br>
+	               		<img src="${small_width_url}" max-width="250px" height="250px"/>
+            		</div>
+
+                    <div class="column">
+                        <input type="radio" id="width_medium" name="nose_projection" value="eye_width_medium" required>
+		          		<br>
+		          		<img src="${medium_width_url}" max-width="250px" height="250px"/>
+                    </div>  
+
+                    <div class="column">
+                        <input type="radio" id="width_large" name="nose_projection" value="eye_width_large" required>         
+		                <br>
+		                <img src="${large_width_url}" max-width="250px" height="250px"/>
+                    </div>  
+                	</crowd-radio-group>
+            </div>
+			</crowd-radio-group>
+		</crowd-tab>
+			
+			
+		<crowd-tab header="Angle of the eye">
+		    <h3></h3>
+		    <crowd-radio-group>
+		        <h2>This person's eye angle is closest to</h2>
+
+			    <div class="row">
+                    <div class="column">
+                        <input type="radio" id="angle_upturned" name="eye_angle" value="eye_angle_upturned" required>    
+				        <br>
+				        <img src="${angle_upturned_url}" max-width="250px" height="250px"/>
+					</div>
+        
+                    <div class="column">
+                        <input type="radio" id="angle_straight" name="eye_angle" value="eye_angle_straight" required> 
+		                <br>
+		          		<img src="${angle_straight_url}" max-width="250px" height="250px"/>
+		    		</div>
+          
+                    <div class="column">
+                        <input type="radio" id="angle_downturned" name="eye_angle" value="eye_angle_downturned" required> 
+		        		<br>
+		          		<img src="${angle_downturned_url}" max-width="250px" height="250px"/>
+                    </div>     
+                </div>
+
+		    </crowd-radio-group>
+		</crowd-tab>
+		   
+		   
+		<crowd-tab header="Eye Crease">
+		    <h3></h3>
+		    <crowd-radio-group>
+		        <h2>This person's eye crease is closest to</h2>
+
+			    <div class="row">
+                    <div class="column">
+                        <input type="radio" id="crease_yes" name="eye_crease" value="eye_crease_yes" required>
+				        <br>
+				        <img src="${crease_yes_url}" max-width="250px" height="250px"/>
+				    </div>
+                    
+                    <div class="column">
+                        <input type="radio" id="crease_no" name="eye_crease" value="eye_crease_no" required>
+		                <br>
+		                <img src="${crease_no_url}" max-width="250px" height="250px"/>
+		            </div> 
+            </div>
+
+		    </crowd-radio-group>				
+		</crowd-tab>
+		   
+		   
+		<crowd-tab header="Eye Curvature">
+		    <h3></h3>
+		    <crowd-radio-group>
+		        <h2>This person's eye curvature is closest to</h2>
+
+			    <div class="row">
+                    <div class="column">
+                        <input type="radio" id="curvature_sharp" name="eye_curvature" value="eye_curvature_sharp" required>
+				        <br>
+				        <img src="${curvature_sharp_url}" max-width="250px" height="250px"/>
+				    </div>
+				    
+                    <div class="column">
+                        <input type="radio" id="curvature_medium" name="eye_curvature" value="eye_curvature_medium" required>
+		          		<br>
+		        		<img src="${curvature_medium_url}" max-width="250px" height="250px"/>
+	          		</div>
+
+                    <div class="column">
+                        <input type="radio" id="curvature_dull" name="eye_curvature" value="eye_curvature_dull" required>
+		                <br>
+		                <img src="${curvature_dull_url}" max-width="250px" height="250px"/>
+                    </div>     
+            </div>
+
+		    </crowd-radio-group>
+		</crowd-tab>
+		   
+		   
+	</crowd-tabs>
+	<full-instructions header="Classification Instructions">
+	  <p>Read the task carefully and inspect the image.</p>
+	  <p>Choose the appropriate label that best suits the image.</p>
+	</full-instructions>
+	<short-instructions>
+	  <p>Read the task carefully and inspect the image.</p>
+	  <p>Choose the appropriate label that best suits the image.</p>
+	</short-instructions>
+  </crowd-image-classifier>
+  
+  
+  
+</crowd-form>
+
+<style>
+.column {
+  float: left;
+  width: 250px;
+  padding: 10px;
+}
+
+.row {
+		height: 250px;
+		width: 100%;
+}
+
+</style>
